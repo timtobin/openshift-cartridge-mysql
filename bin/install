@@ -2,15 +2,18 @@
 
 source $OPENSHIFT_CARTRIDGE_SDK_BASH
 
+latestVersion=$(curl -l ftp://ftp.mirrorservice.org/sites/ftp.mysql.com/Downloads/MySQL-5.7/ | grep -e 'mysql-5\.7\.[0-9]*-linux-glibc2.5-x86_64.tar.gz' | cut -d'-' -f2 | grep -e '5.7' | sort |
+uniq | head -n1)
+
 # Download
-curl -L -o ${OPENSHIFT_DATA_DIR}tmp.tgz http://dev.mysql.com/get/Downloads/mysql-${2}-linux-glibc2.5-x86_64.tar.gz
+curl -L -o ${OPENSHIFT_DATA_DIR}tmp.tgz http://dev.mysql.com/get/Downloads/mysql-${latestVersion}-linux-glibc2.5-x86_64.tar.gz
 
 # Create bin directory if necessary
 mkdir -p ${OPENSHIFT_DATA_DIR}.mysql
 
 # Copy just the mecessary files
-tar -xvzf ${OPENSHIFT_DATA_DIR}tmp.tgz --strip-components=1 -C ${OPENSHIFT_DATA_DIR}.mysql mysql-${2}-linux-glibc2.5-x86_64/bin/{mysql,mysqld,mysql_install_db,mysql_ssl_rsa_setup}
-tar -xvzf ${OPENSHIFT_DATA_DIR}tmp.tgz --strip-components=1 -C ${OPENSHIFT_DATA_DIR}.mysql mysql-${2}-linux-glibc2.5-x86_64/share
+tar -xvzf ${OPENSHIFT_DATA_DIR}tmp.tgz --strip-components=1 -C ${OPENSHIFT_DATA_DIR}.mysql mysql-${latestVersion}-linux-glibc2.5-x86_64/bin/{mysql,mysqld,mysql_install_db,mysql_ssl_rsa_setup}
+tar -xvzf ${OPENSHIFT_DATA_DIR}tmp.tgz --strip-components=1 -C ${OPENSHIFT_DATA_DIR}.mysql mysql-${latestVersion}-linux-glibc2.5-x86_64/share
 
 # Remove downloaded archive
 rm ${OPENSHIFT_DATA_DIR}tmp.tgz
@@ -50,6 +53,6 @@ else
 fi
 
 # Output result
-client_result "MySQL ${2} installed."
+client_result "MySQL ${latestVersion} installed."
 client_result "The initial root password will be set to 'root', make sure to change it!"
 client_result "Use \$DB_HOST and \$DB_PORT environment variables to connect your application."
