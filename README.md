@@ -1,6 +1,6 @@
 # Custom MySQL cartridge for OpenShift
 
-This is a custom OpenShift cartridge able to provide the latest MySQL version (starting with 5.7.7-rc as of 10th of June 2015).
+This is a custom OpenShift cartridge able to provide the latest MySQL version (starting with 5.7.10).
 
 ## Why
 
@@ -14,7 +14,7 @@ When you need a quick and unsofisticated solution to run your application with t
 
 To install this cartridge in your existing OpenShift application, go to **"See the list of cartridges you can add"**, paste the URL below in **"Install your own cartridge"** textbox at the bottom of the page and click "Next".
 
-    http://cartreflect-claytondev.rhcloud.com/github/icflorescu/openshift-cartridge-mysql
+    http://cartreflect-claytondev.rhcloud.com/github/timtobin/openshift-cartridge-mysql
 
 ## Setting up
 
